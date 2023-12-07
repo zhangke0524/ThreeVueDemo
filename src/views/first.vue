@@ -2,7 +2,7 @@
  * @Author: zhangke ke.zhang29@gientech.com
  * @Date: 2023-11-29 14:20:57
  * @LastEditors: zhangke ke.zhang29@gientech.com
- * @LastEditTime: 2023-12-07 09:27:57
+ * @LastEditTime: 2023-12-07 11:19:02
  * @FilePath: \three_vue_project\src\App.vue
  * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
 -->
@@ -49,9 +49,17 @@ console.log('THREE.Scene', THREE.Scene);
   const gridHelper = new THREE.GridHelper(300, 25, 0x004444, 0x004444);
   scene.add(gridHelper);
 
+  // 更改背景色
+  // scene.background = new THREE.Color(0x666666);
+
   // 添加一个环境光对象
   const ambient = new THREE.AmbientLight(0x444444);
   scene.add(ambient);
+
+  // 添加雾化效果
+  // 雾的颜色、雾化开始的距离相机的距离、雾化结束距离相机的距离
+  scene.fog = new THREE.Fog(0xaaf7dc6f, 0.015, 1000);
+
 
   // 实例化一个透视投影相机对象
   // 30:视场角度, width / height:Canvas画布宽高比, 1:近裁截面, 3000：远裁截面
@@ -85,6 +93,10 @@ console.log('THREE.Scene', THREE.Scene);
   controls.enableZoom = true;
   // 设置控制器自动旋转
   controls.autoRotate = true;
+  // 增加阻尼
+  controls.enableDamping = true;
+  // 设置阻尼系数
+  controls.dampingFactor = 0.01;
   
   function animate() {
     requestAnimationFrame(animate)
